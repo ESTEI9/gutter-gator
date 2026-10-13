@@ -32,6 +32,29 @@
  * https://ionicframework.com/docs/theming/dark-mode
  */
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+@import "@ionic/angular/css/palettes/dark.always.css";
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+/* @import '@ionic/angular/css/palettes/dark.system.css'; */
+
+.gg-app {
+    &__header {
+        height: var(--min-height, 56px);
+    }
+
+    &__title-container {
+        display: flex;
+        align-items: center;
+        column-gap: 0.5rem;
+        padding: 0.5rem 0;
+    }
+
+    &__logo {
+        height: var(--min-height, 56px);
+        width: var(--min-height, 56px);
+    }
+
+    &__name {
+        font-size: 2rem;
+        font-family: 'Heading';
+    }
+}

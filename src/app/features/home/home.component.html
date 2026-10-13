@@ -1,0 +1,58 @@
+<ion-content [fullscreen]="true">
+  <section class="gg-hero">
+    <video
+      class="gg-hero__video"
+      src="assets/videos/homepage-hero.mp4"
+      [muted]="true"
+      [autoplay]="true"
+      [loop]="true"
+      type="video/mp4"
+    ></video>
+    <div class="gg-hero__content">
+      <h1 class="gg-hero__header">Premier Gutter & Roof Cleaning</h1>
+      <p class="gg-hero__subheader">Serving Myrtle Beach since 2014</p>
+      <div class="gg-hero__form">
+        <div
+          #heroInputContainer
+          class="gg-hero__form-input-container"
+          [class.gg-hero__form-input-container--has-focus]="inputHasFocus"
+          (click)="showMenu()"
+        >
+          <input
+            #heroSearchInput
+            [(ngModel)]="headerSearchText"
+            class="gg-hero__form-input"
+            [attr.placeholder]="defaultSearchPlaceholder"
+            (click)="inputHasFocus = true"
+          />
+
+          <span
+            class="gg-hero__form-autocomplete-text"
+            (click)="heroSearchInput.focus()"
+          >
+            {{ suggestedSearch()?.displayText }}
+          </span>
+        </div>
+        <gg-mega-menu
+          #megaMenu
+          class="gg-hero__mega-menu"
+          [class.gg-hero__mega-menu--show]="showMegaMenu()"
+          [searchString]="headerSearchText"
+          (searchMatches)="setSearchValues($event)"
+        ></gg-mega-menu>
+      </div>
+      <div class="gg-hero__topics">
+        @for (topic of highlightedTopics; track topic.enum) {
+          <ion-button color="secondary" fill="clear" shape="round">{{
+            topic.value
+          }}</ion-button>
+        }
+      </div>
+    </div>
+    <ion-fab class="gg-hero__fold-fab">
+      <ion-fab-button mode="ios" class="gg-hero__fold-button">
+        <ion-icon [src]="icons.logoDoubleShield"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </section>
+</ion-content>

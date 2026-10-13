@@ -1,0 +1,30 @@
+@use "./theme/colors";
+@use "./theme/variables";
+@use "./theme/fonts";
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Heading", sans-serif;
+}
+
+body {
+  font-size: 16px;
+}
+
+ion-input {
+  border-radius: 22px;
+  border: 1px ridge var(--ion-background-color-step-250);
+  background-color: var(--ion-background-color-step-100);
+  --padding-start: 1rem !important;
+  --padding-end: 1rem !important;
+  --highlight-height: 0 !important;
+  transition: border-color 0.1s;
+
+  &.has-focus {
+    border-color: var(--ion-color-primary);
+  }
+}
