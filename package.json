@@ -11,7 +11,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "lint:scss": "stylelint '**/*.scss' --fix",
-    "deploy": "npm run build && git subtree push --prefix docs origin staging"
+    "deploy": "npm run build && git subtree push --prefix dist origin/main staging"
   },
   "private": true,
   "dependencies": {
