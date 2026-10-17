@@ -10,7 +10,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "lint:scss": "stylelint '**/*.scss' --fix"
+    "lint:scss": "stylelint '**/*.scss' --fix",
+    "deploy": "npm run build && git subtree push --prefix docs origin main"
   },
   "private": true,
   "dependencies": {
