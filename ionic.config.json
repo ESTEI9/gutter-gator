@@ -1,7 +1,0 @@
-{
-  "name": "gutter-gator",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular-standalone"
-}
