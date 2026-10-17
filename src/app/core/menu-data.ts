@@ -10,21 +10,26 @@ const data: WorkGenre[] = [
         workTypes: [
             {
                 name: 'cleaning',
-                displayText: 'Cleaning'
+                displayText: 'Cleaning',
+                hasInternalLink: true
             }, {
                 name: 'installation',
                 displayText: 'Install',
+                hasInternalLink: true,
                 workTypes: [
                     {
                         name: 'gutters',
-                        displayText: 'Gutters'
+                        displayText: 'Gutters',
+                        hasInternalLink: true,
                     },
                     {
                         name: 'gutter-guards',
-                        displayText: 'Guards'
+                        displayText: 'Guards',
+                        hasInternalLink: true,
                     }, {
                         name: 'french-drains',
-                        displayText: 'French Drains'
+                        displayText: 'French Drains',
+                        hasInternalLink: true,
                     }
                 ]
             }
@@ -145,7 +150,7 @@ export const MenuData = (() => {
 })()
 
 function getSearchTerms(item: WorkType, carryOver?: string[]) {
-    item.searchTerms = [...(item.searchTerms ?? []), ...getSearchTermPool(item), ...(carryOver ?? [])];
+    item.searchTerms = [...(item.searchTerms ?? []), ...getSearchTermPool(item), ...(carryOver ?? [])].filter((term, index, terms) => term && terms.indexOf(term) === index);
 
     if (item.workTypes) {
         item.workTypes.map(subType => getSearchTerms(subType, carryOver));
@@ -164,5 +169,5 @@ function getSearchTermPool(item: WorkType) {
         termsToSearch = termsToSearch.concat(searchTerms);
     }
 
-    return termsToSearch.filter((term, index, terms) => term && terms.indexOf(term) === index);
+    return termsToSearch;
 }

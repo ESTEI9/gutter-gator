@@ -39,6 +39,10 @@
 .gg-app {
     &__header {
         height: var(--min-height, 56px);
+        
+        ion-toolbar {
+            box-shadow: 0 2px 4px var(--ion-background-color);
+        }
     }
 
     &__title-container {

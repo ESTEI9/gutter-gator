@@ -9,11 +9,18 @@ module.exports = tseslint.config(
     files: ["**/*.ts"],
     ignores: ["projects/**/*"],
     extends: [...angular.configs.tsRecommended],
-    plugins: {
-      "@stylistic": stylistic,
-    },
+    plugins: [
+        { "@stylistic": stylistic },
+        "no-explicit-undefined"
+    ],
     processor: angular.processInlineTemplates,
     rules: {
+      "object-curly-spacing": ["error", { before: true, after: true }],
+      indent: ["error", 4],
+      "comma-spacing": ["error", { before: false, after: true }],
+      "@stylistic/no-trailing-spaces": "error",
+      semi: ["warn", "always"],
+      "@stylistic/arrow-spacing": "warn",
       quotes: ["off"],
       "sort-imports": [
         "error",

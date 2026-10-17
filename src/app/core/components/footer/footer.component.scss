@@ -1,0 +1,64 @@
+.gg-footer {
+    background: var(--ion-background-color);
+    border-top: 2px groove rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+
+    &__content {
+        padding: 1rem;
+        position: relative;
+        overflow: hidden;
+
+        &-image {
+            transform: rotateY(180deg) rotateZ(-10deg);
+            height: 200px;
+            position: absolute;
+            right: -2rem;
+            bottom: -2rem;
+            opacity: 0.7;
+            z-index: -1;
+
+            @media (max-width: 768px) {
+                display: none;
+            }
+        }
+    }
+
+    &__contact {
+        border-top: 1px groove rgba(0, 0, 0, 0.3);
+        background: var(--ion-color-primary);
+    }
+
+    &__contact-list {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        ion-item {
+            cursor: pointer;
+        }
+    }
+    
+    ion-item {
+        --background: transparent;
+    }
+
+    ion-icon {
+        margin-right: 0.5rem;
+        filter: drop-shadow(1px 1px 2px rgba(var(--ion-color-light-contrast-rgb), 0.8));
+    }
+
+    &__email-address {
+        &::before {
+            content: '(843) 516-6986';
+            display: inline;
+        }
+    }
+
+    &__phone-number {
+        &::before {
+            content: 'guttergatorsc@gmail.com';
+            display: inline;
+        }
+    }
+}

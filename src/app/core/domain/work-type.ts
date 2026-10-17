@@ -3,6 +3,7 @@ export class WorkType {
     displayText: string;
     workTypes?: WorkType[];
     searchTerms?: string[];
+    hasInternalLink?: boolean;
 
     constructor() { }
 }
