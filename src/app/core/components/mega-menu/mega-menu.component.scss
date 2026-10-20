@@ -12,12 +12,31 @@
   &__column {
     white-space: nowrap;
     --ion-item-background: transparent;
+    display: flex;
+    flex-direction: column;
 
     &-label {
       text-transform: uppercase;
       color: var(--ion-color-primary);
       font-weight: bold;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
+      align-self: center;
+    }
+  }
+
+  &__division {
+    display: flex;
+  }
+
+  &__category {
+    white-space: nowrap;
+    --ion-item-background: transparent;
+
+    &-label {
+        text-transform: uppercase;
+        color: var(--ion-color-secondary);
+        font-weight: bold;
+        font-size: 1.1rem;
     }
   }
 

@@ -19,6 +19,7 @@ import { WorkType } from '@core/domain/work-type';
 import { loremIpsum } from '@core/domain/lorem-ipsum';
 import { IconMap } from '@iconmap';
 import { FooterComponent } from '@core/components/footer/footer.component';
+import { MenuDivision } from '@core/components/mega-menu/domain/menu-division';
 
 enum HighlightedTopics {
     ROOF_CLEANING = 'Roof Cleaning',
@@ -93,11 +94,11 @@ export class HomeComponent {
         }));
     }
 
-    setSearchValues(menu: MegaMenu[]) {
+    setSearchValues(menu: MenuDivision[]) {
         this.suggestedSearch.set(undefined);
 
-        if (menu[0]) {
-            const firstOption = menu[0].links[0];
+        if (menu[0]?.divisions[0]) {
+            const firstOption = menu[0].divisions[0].links[0];
             const workTypesOption = firstOption.workTypes?.length
                 ? firstOption.workTypes[0]
                 : undefined;

@@ -5,6 +5,9 @@ import { MenuItem } from './domain/menu-item';
 import { WorkType } from '@core/domain/work-type';
 import { IonListHeader, IonList, IonItem, IonItemGroup, IonButton, IonLabel } from '@ionic/angular';
 import { RouterLink } from '@angular/router';
+import { WorkDivision } from '@core/domain/work-division';
+import { MenuDivision } from './domain/menu-division';
+import { WorkGenre } from '@core/domain/work-genre';
 
 @Component({
     selector: 'gg-mega-menu',
@@ -14,10 +17,10 @@ import { RouterLink } from '@angular/router';
 })
 export class MegaMenuComponent {
     searchString = input<string>();
-    searchMatches = output<MegaMenu[]>();
+    searchMatches = output<MenuDivision[]>();
 
     splitRegex = /[\s,\,,-]/;
-    fullMenu: MegaMenu[] = this.getMenu();
+    fullMenu: MenuDivision[] = this.getMenus();
 
     menu = computed(() => {
         const searchTerm = this.searchString() ?? '';
@@ -27,20 +30,31 @@ export class MegaMenuComponent {
             return this.fullMenu;
         }
 
-        const data = structuredClone(MenuData).filter(item => {
-            const newMenu = item.workTypes.filter(workType => {
-                return searchTerm.split(' ').every(term => this.getIsSearchedItem(workType, term.toLowerCase()));
-            })
+        const data = (structuredClone(MenuData) as WorkDivision[]).map(division => {
+            const newMembers = division.members.map(member => {
+                const newMenu = member.workTypes.filter(workType => {
+                    return searchTerm.split(' ').every(term => this.getIsSearchedItem(workType, term.toLowerCase()));
+                })
 
-            if (newMenu.length) {
-                item.workTypes = newMenu;
-                return item;
+                if (newMenu.length) {
+                    member.workTypes = newMenu;
+                    return member;
+                }
+
+                return undefined
+            }).filter(member => member !== undefined);
+
+            if(newMembers && newMembers.length > 0) {
+                return {
+                    name: division.name,
+                    members: newMembers
+                } as WorkDivision
             }
 
             return undefined;
-        })
+        }).filter(division => division !== undefined)
 
-        const newMenu = this.getMenu(data);
+        const newMenu = this.getMenus(data);
         this.searchMatches.emit(newMenu);
 
         return newMenu;
@@ -59,11 +73,14 @@ export class MegaMenuComponent {
         return undefined;
     }
 
-    getMenu(source = MenuData) {
-        return source.map(item => ({
-            category: item.displayText,
-            links: item.workTypes.map((type) => this.getMenuItem(type, item.displayText))
-        })) as MegaMenu[];
+    getMenus(source = MenuData) {
+        return source.map(division => ({
+            name: division.name,
+            divisions: division.members.map(member => ({
+                category: member.displayText,
+                links: member.workTypes.map((type) => this.getMenuItem(type, member.displayText))
+            }))
+        })) as MenuDivision[]
     }
 
     getMenuItem(item: WorkType, category: string, parent?: WorkType): MenuItem {

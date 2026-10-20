@@ -1,8 +1,9 @@
 import { WorkCategories } from "./domain/enum/work-categories";
+import { WorkDivision } from "./domain/work-division";
 import { WorkGenre } from "./domain/work-genre";
 import { WorkType } from "./domain/work-type";
 
-const data: WorkGenre[] = [
+const residential: WorkGenre[] = [
     {
         category: WorkCategories.GUTTERS,
         name: 'gutters',
@@ -60,6 +61,38 @@ const data: WorkGenre[] = [
             }
         ]
     }, {
+        category: WorkCategories.LANDSCAPING,
+        name: 'landscaping',
+        displayText: 'Landscaping',
+        workTypes: [
+            {
+                name: 'decorations',
+                displayText: 'Decorations'
+            }, {
+                name: 'power-washing',
+                displayText: 'Power Washing'
+            }, {
+                name: 'lawn-care',
+                displayText: 'Lawn',
+                workTypes: [
+                    {
+                        name: 'grass',
+                        displayText: 'Trimming/Mowing',
+                    }, {
+                        name: 'maintenance',
+                        displayText: 'Maintenance'
+                    }, {
+                        name: 'seeding',
+                        displayText: 'Seeding'
+                    }
+                ]
+            }
+        ]
+    }
+];
+
+const commercial: WorkGenre[] = [
+    {
         category: WorkCategories.CONCRETE,
         name: 'concrete',
         displayText: 'Concrete',
@@ -109,45 +142,29 @@ const data: WorkGenre[] = [
                 displayText: 'Insulation'
             }
         ]
-    }, {
-        category: WorkCategories.LANDSCAPING,
-        name: 'landscaping',
-        displayText: 'Landscaping',
-        workTypes: [
-            {
-                name: 'decorations',
-                displayText: 'Decorations'
-            }, {
-                name: 'power-washing',
-                displayText: 'Power Washing'
-            }, {
-                name: 'lawn-care',
-                displayText: 'Lawn',
-                workTypes: [
-                    {
-                        name: 'grass',
-                        displayText: 'Trimming/Mowing',
-                    }, {
-                        name: 'maintenance',
-                        displayText: 'Maintenance'
-                    }, {
-                        name: 'seeding',
-                        displayText: 'Seeding'
-                    }
-                ]
-            }
-        ]
     }
-]
+];
 
-export const MenuData = (() => {
-    return data.map(item => {
-        item.searchTerms = getSearchTermPool(item);
-        item.workTypes = item.workTypes.map(workType => getSearchTerms(workType, [item.name]));
+export const MenuData: WorkDivision[] = (() => ([
+    {
+        name: 'residential',
+        members: residential.map(item => {
+            item.searchTerms = getSearchTermPool(item);
+            item.workTypes = item.workTypes.map(workType => getSearchTerms(workType, [item.name]));
 
-        return item;
-    });
-})()
+            return item;
+        })
+    },
+    {
+        name: 'commercial',
+        members: commercial.map(item => {
+            item.searchTerms = getSearchTermPool(item);
+            item.workTypes = item.workTypes.map(workType => getSearchTerms(workType, [item.name]));
+
+            return item;
+        })
+    }
+]))();
 
 function getSearchTerms(item: WorkType, carryOver?: string[]) {
     item.searchTerms = [...(item.searchTerms ?? []), ...getSearchTermPool(item), ...(carryOver ?? [])].filter((term, index, terms) => term && terms.indexOf(term) === index);

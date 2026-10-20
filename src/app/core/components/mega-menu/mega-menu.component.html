@@ -1,74 +1,58 @@
 <div class="gg-mega-menu" [class.gg-mega-menu--empty]="menu().length === 0">
-  @for (item of menu(); track item.category) {
+    @for (item of menu(); track item.name) {
     <div class="gg-mega-menu__column">
-      <ion-list>
-        <ion-list-header lines="inset" class="gg-menu-menu__column-header">
-          <ion-label class="gg-mega-menu__column-label">{{
-            item.category
-          }}</ion-label>
-        </ion-list-header>
-        @for (link of item.links; track link.name) {
-          <ion-item
-            lines="none"
-            class="gg-mega-menu__item"
-            [class.gg-mega-menu__item--has-subgroup]="!!link.workTypes"
-          >
-            @if (link.workTypes) {
-              <ion-list class="gg-mega-menu__sublist">
-                <ion-list-header>
-                  <ion-label>
-                    <ion-button
-                      class="gg-mega-menu__button"
-                      fill="clear"
-                      color="light"
-                      expand="block"
-                      [disabled]="!link.routerLink"
-                      [routerLink]="link.routerLink"
-                      ><span class="gg-mega-menu__button-content">{{
-                        link.displayText
-                      }}</span></ion-button
-                    >
-                  </ion-label>
-                </ion-list-header>
-                <ion-item-group class="gg-mega-menu__item-subgroup">
-                  @for (subItem of link.workTypes; track subItem.name) {
-                    <ion-item lines="none">
-                      @let subLink = getSubLink(subItem);
-                      <ion-label>
-                        <ion-button
-                          class="gg-mega-menu__button--subgroup"
-                          fill="clear"
-                          color="light"
-                          expand="block"
-                          [disabled]="!subLink.routerLink"
-                          [routerLink]="subLink.routerLink"
-                          ><span class="gg-mega-menu__button-content">{{
-                            subLink.displayText
-                          }}</span></ion-button
-                        >
-                      </ion-label>
-                    </ion-item>
-                  }
-                </ion-item-group>
-              </ion-list>
-            } @else {
-              <ion-label>
-                <ion-button
-                  class="gg-mega-menu__button"
-                  fill="clear"
-                  color="light"
-                  expand="block"
-                  [disabled]="!link.routerLink"
-                  [routerLink]="link.routerLink"
-                  ><span class="gg-mega-menu__button-content">{{
-                    link.displayText
-                  }}</span></ion-button
-                >
-              </ion-label>
+        <ion-label class="gg-mega-menu__column-label">{{ item.name }}</ion-label>
+        <div class="gg-mega-menu__division">
+            @for (division of item.divisions; track division.category) {
+            <ion-list lines="none" class="gg-mega-menu__category-list">
+                <ion-item lines="inset" class="gg-mega-menu__category">
+                    <ion-label class="gg-mega-menu__category-label">
+                        {{ division.category}}
+                    </ion-label>
+                </ion-item>
+                @for(link of division.links; track link.name) {
+                <ion-item lines="none" class="gg-mega-menu__item"
+                    [class.gg-mega-menu__item--has-subgroup]="!!link.workTypes">
+                    @if (link.workTypes) {
+                    <ion-list class="gg-mega-menu__sublist">
+                        <ion-list-header>
+                            <ion-label>
+                                <ion-button class="gg-mega-menu__button" fill="clear" color="light" expand="block"
+                                    [disabled]="!link.routerLink" [routerLink]="link.routerLink"><span
+                                        class="gg-mega-menu__button-content">{{
+                                        link.displayText
+                                        }}</span></ion-button>
+                            </ion-label>
+                        </ion-list-header>
+                        <ion-item-group class="gg-mega-menu__item-subgroup">
+                            @for (subItem of link.workTypes; track subItem.name) {
+                            <ion-item lines="none">
+                                @let subLink = getSubLink(subItem);
+                                <ion-label>
+                                    <ion-button class="gg-mega-menu__button--subgroup" fill="clear" color="light"
+                                        expand="block" [disabled]="!subLink.routerLink"
+                                        [routerLink]="subLink.routerLink"><span class="gg-mega-menu__button-content">{{
+                                            subLink.displayText
+                                            }}</span></ion-button>
+                                </ion-label>
+                            </ion-item>
+                            }
+                        </ion-item-group>
+                    </ion-list>
+                    } @else {
+                    <ion-label>
+                        <ion-button class="gg-mega-menu__button" fill="clear" color="light" expand="block"
+                            [disabled]="!link.routerLink" [routerLink]="link.routerLink"><span
+                                class="gg-mega-menu__button-content">{{
+                                link.displayText
+                                }}</span></ion-button>
+                    </ion-label>
+                    }
+                </ion-item>
+                }
+            </ion-list>
             }
-          </ion-item>
-        }
-      </ion-list>
+        </div>
     </div>
-  }
+    }
 </div>
