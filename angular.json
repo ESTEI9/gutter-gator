@@ -18,6 +18,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "baseHref": "/gutter-gator/",
             "outputPath": {
               "base": "dist",
               "browser": ""
