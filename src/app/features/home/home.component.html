@@ -4,7 +4,7 @@
             [loop]="true" type="video/mp4"></video>
         <div class="gg-hero__content">
             <h1 class="gg-hero__header">Premier Gutter & Roof Cleaning</h1>
-            <p class="gg-hero__subheader">Serving Myrtle Beach since 2014</p>
+            <p class="gg-hero__subheader">Serving Myrtle Beach since 2021</p>
             <div class="gg-hero__form">
                 <div #heroInputContainer class="gg-hero__form-input-container"
                     [class.gg-hero__form-input-container--has-focus]="inputHasFocus" (click)="showMenu()">
@@ -34,16 +34,32 @@
     </section>
     <section class="gg-about">
         <div class="gg-about__content">
-            <h2>Why Gators? Why Gutters?</h2>
-            <p>
-                Because of alliteration, duh. And, alligators are cool! You ever seen
-                one of those things in person? They're a little unnerving too, tbh.
-                {{ loremIpsum }}
-            </p>
-
-            <div class="gg-about__brands">
-                <h5>These are the big name brands and people we work with.</h5>
+            <div class="title-section">
+                <h2>Who is Gutter Gator?</h2>
+                <p class="subtitle">Serving the Grand Strand area since 2021, Gutter Gator is a local business
+                    specializing in making the water flow where it's supposed to go! Our main business is in gutters, specifically...</p>
             </div>
+
+            <div class="gg-about__content-grid">
+                <div class="subsection">
+                    <h3 class="title">Maintenance</h3>
+                    <p class="subtitle">Muck and mire making you sigh?</p>
+                    We'll make it go "Bye bye!" Gutter Gator is a cold-blooded dirt dinosaur. We clean everything on the
+                    outside so you feel good about what you see - we do gutters, soft wash, pressure wash walls, roofs,
+                    & concrete.
+                    Sometimes all you need is a little TLC to make it all look right. Gutter gator is all about quality
+                    service and doing things right the first time to give that sweet sense of satisfaction.
+                </div>
+
+                <div class="subsection">
+                    <h3 class="title">Repair</h3>
+                    <p class="subtitle">Storm got your gutters in a spiral?</p>
+                    Gutter gator can get you out of that chiral (kai-r&aelig;l). We do more than clean, we dig our claws
+                    into leaf guards, designing drainage systems and more. We can help with all your gutter needs from start to finish.
+                    No matter what you got going on with gutters, Gutter Gator is your connection!
+                </div>
+            </div>
+            <p class="gg-about__connect">Need more than a little refresh? Drop us a line and we'll set a time!</p>
         </div>
         <div class="gg-about__image-container">
             <img class="gg-about__palm" [src]="icons.realisticPalm" />
@@ -84,6 +100,9 @@
             </h4>
             <p>Feel free to put other things here.</p>
         </div>
+    </section>
+    <section class="gg-brands">
+        <h5>These are the big name brands and people we work with.</h5>
     </section>
     <gg-footer></gg-footer>
 </ion-content>

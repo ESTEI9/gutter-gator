@@ -37,6 +37,12 @@
 /* @import '@ionic/angular/css/palettes/dark.system.css'; */
 
 .gg-app {
+    font-size: 18px;
+    
+    p {
+        line-height: 1.1;
+    }
+
     &__header {
         height: var(--min-height, 56px);
         
